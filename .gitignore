@@ -1,0 +1,56 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]eleases/
+[Rr]eleasesPublic/
+[Aa]llBuild/
+[Ll]ogs/
+[Ll]og/
+[Oo]utput/
+[Bb]in/
+[Oo]bj/
+[Ll]ogs/
+[Ll]og/
+[Tt]estResults/
+*.pdb
+*.cache
+*.log
+*.suo
+*.user
+*.userosscache
+*.suo
+*.ncb
+*.sdf
+*.opensdf
+*.vssscc
+*.vsscc
+*.vspscc
+*.vscode/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.suo
+*.sdf
+*.opensdf
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Azure Pipelines
+*.pipeline
