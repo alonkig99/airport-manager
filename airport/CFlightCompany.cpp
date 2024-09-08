@@ -5,7 +5,7 @@
 using namespace std;
 
 
-CFlightCompany::CFlightCompany(std::string name) {
+CFlightCompany::CFlightCompany(const string& name) {
 	SetName(name);
 
 }
@@ -24,6 +24,4 @@ void CFlightCompany::Print()const {
 	cout << "Company's name: " << name << endl;
 }
 
-CFlightCompany::~CFlightCompany()
-{
-}
+CFlightCompany::~CFlightCompany() {}

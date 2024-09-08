@@ -6,7 +6,7 @@ class CCrewMember
 {
 public:
 
-	CCrewMember(std::string name,const CAddress& address, int totalAirTime=0);
+	CCrewMember(const std::string& name,const CAddress& address, int totalAirTime=0);
 	CCrewMember(const CCrewMember& other);
 	bool UpdateMinutes(int newMinutes);
 	std::string GetName()const;

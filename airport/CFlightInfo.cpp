@@ -4,7 +4,7 @@
 
 using namespace std;
 
-CFlightInfo::CFlightInfo(std::string destination, int flightNum, int flightDuration, int flightDistance) {
+CFlightInfo::CFlightInfo(const string& destination, int flightNum, int flightDuration, int flightDistance) {
     SetDest(destination);
     SetFlightNum(flightNum);
     SetFlightDuration(flightDuration);
@@ -24,7 +24,7 @@ string CFlightInfo::GetDest() const {
     return destination;
 }
 
-void CFlightInfo::SetDest(string newDest) {
+void CFlightInfo::SetDest(const string& newDest) {
     destination = newDest;
 }
 
@@ -64,6 +64,4 @@ void CFlightInfo::Print() const {
         << endl;
 }
 
-CFlightInfo::~CFlightInfo()
-{
-}
+CFlightInfo::~CFlightInfo() {}

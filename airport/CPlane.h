@@ -4,7 +4,7 @@ class CPlane
 {
 public:
 
-	CPlane(int SerialNum, int NumSeats, std::string ModelName);
+	CPlane(int SerialNum, int NumSeats, const std::string& ModelName);
 	CPlane(const CPlane& other);
 	int GetSerialNum() const;
 	std::string GetModelName() const;

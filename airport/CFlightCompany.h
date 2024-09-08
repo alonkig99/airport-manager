@@ -5,7 +5,7 @@
 class CFlightCompany
 {
 public:
-	CFlightCompany(std::string name);
+	CFlightCompany(const std::string& name);
 	CFlightCompany(const CFlightCompany& other);
 
 	std::string GetName()const;

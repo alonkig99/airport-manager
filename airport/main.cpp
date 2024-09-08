@@ -1,8 +1,6 @@
 #define _CRT_SECURE_NO_DEPRECATE
 
 #include <iostream>
-using namespace std;
-
 #include "CPlane.h"
 #include "CFlightInfo.h"
 #include "CCrewMember.h"
@@ -10,9 +8,10 @@ using namespace std;
 #include "CAddress.h"
 #include <iostream>
 
+
 using namespace std;
 
-void main() {
+int main() {
 
 	cout << endl << "Checking CFlightCompany" << endl;
 

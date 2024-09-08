@@ -5,7 +5,7 @@
 
 using namespace std;
 
-CCrewMember::CCrewMember(std::string name, const CAddress& address, int totalAirTime)
+CCrewMember::CCrewMember(const string& name, const CAddress& address, int totalAirTime)
 	:name(name),address(address),totalAirTime(totalAirTime) {}
 
 CCrewMember::CCrewMember(const CCrewMember& other)
@@ -38,8 +38,6 @@ int CCrewMember::GetAirTime()const {
 }
 
 void CCrewMember::Print()const {
-    using namespace std;
-
     cout << "Crewmember: " << name << endl;
     cout << "Address: ";
     address.Print(); 
@@ -51,7 +49,5 @@ bool CCrewMember::IsEqual(const CCrewMember& other) const{
     return this->name == other.name;
 }
 
-CCrewMember::~CCrewMember()
-{
-}
+CCrewMember::~CCrewMember(){}
 

@@ -5,7 +5,7 @@ using namespace std;
 
 
 
-    CPlane::CPlane(int serialNum, int numSeats, string modelName) {
+    CPlane::CPlane(int serialNum, int numSeats, const string& modelName) {
         this->serialNum = serialNum;
         this->numSeats = numSeats;
         this->modelName = modelName;

@@ -4,10 +4,10 @@ class CFlightInfo
 {
 public:
 
-	CFlightInfo(std::string destination,int flightNum, int flightDuration, int flightDistance);
+	CFlightInfo(const std::string& destination,int flightNum, int flightDuration, int flightDistance);
 	CFlightInfo(const CFlightInfo& other);
 	std::string GetDest()const;
-	void SetDest(std::string newDest);
+	void SetDest(const std::string& newDest);
 	int GetFlightNum()const;
 	void SetFlightNum(int newFlightNum);
 	int GetFlightDuration()const;

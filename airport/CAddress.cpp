@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-CAddress::CAddress(int houseNumber, std::string streetName, std::string cityName) {
+CAddress::CAddress(int houseNumber,const string& streetName, const string& cityName) {
 	this->houseNumber = houseNumber;
 	this->streetName = streetName;
 	this->cityName = cityName;
@@ -32,14 +32,12 @@ void CAddress::Print() const {
     std::cout  << streetName <<" "<< houseNumber <<", "<< cityName << std::endl;
 }
 
-void CAddress::UpdateAddress(std::string newCity, std::string newStreet, int newHouseNum) {
+void CAddress::UpdateAddress(const string& newCity, const string& newStreet, int newHouseNum) {
     this->cityName = newCity;
     this->streetName = newStreet;
     this->houseNumber = newHouseNum;
 }
 
-CAddress::~CAddress()
-{
-}
+CAddress::~CAddress(){}
 
 

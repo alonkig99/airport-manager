@@ -4,14 +4,14 @@
 class CAddress
 {
 public:
-    CAddress(int HouseNumber, std::string StreetName, std::string CityName = "Tel Aviv");
+    CAddress(int HouseNumber, const std::string& StreetName,const std::string& CityName = "Tel Aviv");
     CAddress(const CAddress& other);
 
     std::string GetCityName() const;
     std::string GetStreetName() const;
     int GetHouseNumber() const;
     void Print() const;
-    void UpdateAddress(std::string NewCity, std::string NewStreet, int NewHouseNum);
+    void UpdateAddress(const std::string& NewCity, const std::string& NewStreet, int NewHouseNum);
     ~CAddress();
 
 
