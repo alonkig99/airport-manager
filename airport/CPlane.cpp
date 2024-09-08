@@ -5,20 +5,12 @@ using namespace std;
 
 
 
-    CPlane::CPlane(int serialNum, int numSeats, const string& modelName) {
-        this->serialNum = serialNum;
-        this->numSeats = numSeats;
-        this->modelName = modelName;
-        
+CPlane::CPlane(int serialNum, int numSeats, const string& modelName)
+    : serialNum(serialNum), numSeats(numSeats), modelName(modelName){}
 
-    }
 
-    CPlane::CPlane(const CPlane& other)
-    {
-        this->serialNum = other.serialNum;
-        this->numSeats = other.numSeats;
-        this->modelName = other.modelName;
-    }
+CPlane::CPlane(const CPlane& other)
+    : serialNum(other.serialNum), numSeats(other.numSeats), modelName(other.modelName){}
 
  
     int CPlane::GetSerialNum() const{

@@ -5,21 +5,17 @@
 using namespace std;
 
 
-CFlightCompany::CFlightCompany(const string& name) {
-	SetName(name);
+CFlightCompany::CFlightCompany(const string& name):name(name) {}
+CFlightCompany::CFlightCompany(const CFlightCompany& other):name(other.name) {}
 
-}
-CFlightCompany::CFlightCompany(const CFlightCompany& other)
-{
-	SetName(other.name);
-}
-std::string CFlightCompany::GetName()const {
+string CFlightCompany::GetName()const {
 	return name;
 }
 
-void CFlightCompany::SetName(const string& newName) {
+void CFlightCompany::SetName(string newName) {
 	name = newName;
 }
+
 void CFlightCompany::Print()const {
 	cout << "Company's name: " << name << endl;
 }

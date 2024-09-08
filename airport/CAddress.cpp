@@ -3,18 +3,12 @@
 #include <string>
 using namespace std;
 
-CAddress::CAddress(int houseNumber,const string& streetName, const string& cityName) {
-	this->houseNumber = houseNumber;
-	this->streetName = streetName;
-	this->cityName = cityName;
-}
+CAddress::CAddress(int houseNumber,const string& streetName, const string& cityName)
+    :houseNumber(houseNumber),streetName(streetName),cityName(cityName){}
 
 CAddress::CAddress(const CAddress& other)
-{
-    this->houseNumber = other.houseNumber;
-    this->streetName = other.streetName;
-    this->cityName = other.cityName;
-}
+    : houseNumber(other.houseNumber), streetName(other.streetName), cityName(other.cityName){}
+
 
 std::string CAddress::GetCityName() const {
     return cityName;
@@ -33,9 +27,9 @@ void CAddress::Print() const {
 }
 
 void CAddress::UpdateAddress(const string& newCity, const string& newStreet, int newHouseNum) {
-    this->cityName = newCity;
-    this->streetName = newStreet;
-    this->houseNumber = newHouseNum;
+    cityName = newCity;
+    streetName = newStreet;
+    houseNumber = newHouseNum;
 }
 
 CAddress::~CAddress(){}

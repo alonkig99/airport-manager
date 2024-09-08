@@ -46,7 +46,7 @@ void CCrewMember::Print()const {
 
 
 bool CCrewMember::IsEqual(const CCrewMember& other) const{
-    return this->name == other.name;
+    return name == other.name;
 }
 
 CCrewMember::~CCrewMember(){}

@@ -4,21 +4,16 @@
 
 using namespace std;
 
-CFlightInfo::CFlightInfo(const string& destination, int flightNum, int flightDuration, int flightDistance) {
-    SetDest(destination);
-    SetFlightNum(flightNum);
-    SetFlightDuration(flightDuration);
-    SetFlightDistance(flightDistance);
 
-}
+CFlightInfo::CFlightInfo(const string& destination, int flightNum, int flightDuration, int flightDistance)
+    : destination(destination), flightNum(flightNum), flightDuration(flightDuration), flightDistance(flightDistance)
+{}
+
 
 CFlightInfo::CFlightInfo(const CFlightInfo& other)
-{
-    SetDest(other.destination);
-    SetFlightNum(other.flightNum);
-    SetFlightDuration(other.flightDuration);
-    SetFlightDistance(other.flightDistance);
-}
+    : destination(other.destination), flightNum(other.flightNum), flightDuration(other.flightDuration), flightDistance(other.flightDistance)
+{}
+
 
 string CFlightInfo::GetDest() const {
     return destination;

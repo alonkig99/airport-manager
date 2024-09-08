@@ -9,7 +9,7 @@ public:
 	CFlightCompany(const CFlightCompany& other);
 
 	std::string GetName()const;
-	void SetName(const std::string& newName);
+	void SetName(std::string newName);
 	void Print()const;
 	~CFlightCompany();
 
