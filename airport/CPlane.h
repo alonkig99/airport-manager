@@ -4,17 +4,24 @@ class CPlane
 {
 public:
 
-	CPlane(int SerialNum, int NumSeats, const std::string& ModelName);
+	CPlane(int NumSeats, const std::string& ModelName);
 	CPlane(const CPlane& other);
+	CPlane() = delete;
 	int GetSerialNum() const;
-	std::string GetModelName() const;
+	const std::string& GetModelName() const;
 	int GetNumSeats() const;
 	void Print() const;
-	bool IsEqual(const CPlane& Other) const;
+	friend std::ostream& operator<<(std::ostream& os, const CPlane& plane);
+	bool operator ==(const CPlane& other)const;
+	bool operator !=(const CPlane& other)const; 
+	const CPlane& operator++();
+	 CPlane operator++(int);
+
 	~CPlane();
 
 private:
-	int serialNum;
+	static int serialNum;
+	int mySerialNum;
 	std::string modelName;
 	int numSeats;
 

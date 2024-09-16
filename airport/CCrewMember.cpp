@@ -5,19 +5,25 @@
 
 using namespace std;
 
+int CCrewMember::idCounter = 1000;
+
 CCrewMember::CCrewMember(const string& name, const CAddress& address, int totalAirTime)
-	:name(name),address(address),totalAirTime(totalAirTime) {}
+	:memberID(idCounter++),name(name),address(address),totalAirTime(totalAirTime) {}
 
 CCrewMember::CCrewMember(const CCrewMember& other)
-    : name(other.name), address(other.address), totalAirTime(other.totalAirTime){}
+    :memberID(other.memberID), name(other.name), address(other.address), totalAirTime(other.totalAirTime){}
 
 
-bool CCrewMember::UpdateMinutes(int newMinutes) {
-    if (newMinutes <= 0) return false;
-   totalAirTime += newMinutes;
-    return true;
+
+
+//+= operator updates total air time
+const CCrewMember& CCrewMember::operator+=(int minutes) {
+    if (minutes > 0) 
+        totalAirTime += minutes;
+    
+    return *this;
 }
-std::string CCrewMember::GetName()const {
+const std::string& CCrewMember::GetName()const {
     return name;
 }
 
@@ -25,7 +31,7 @@ void CCrewMember::SetName(const string& newName) {
     name = newName;
 }
 
-CAddress CCrewMember::GetAddress()const {
+const CAddress& CCrewMember::GetAddress()const {
     return address;
 }
 
@@ -37,17 +43,18 @@ int CCrewMember::GetAirTime()const {
     return totalAirTime;
 }
 
-void CCrewMember::Print()const {
-    cout << "Crewmember: " << name << endl;
-    cout << "Address: ";
-    address.Print(); 
-    cout << "Total Air Time: " << totalAirTime << " minutes" << endl;
+ostream& operator<<(ostream& os, const CCrewMember& member) {
+    os << "Member ID" << member.memberID << ", name:" << member.name 
+        << ", total airtime:" << member.totalAirTime << endl;
+
+        return os;
 }
+bool CCrewMember::operator==(const CCrewMember& other) const {
+    return memberID == other.memberID;
 
-
-bool CCrewMember::IsEqual(const CCrewMember& other) const{
-    return name == other.name;
 }
-
+bool CCrewMember::operator!=(const CCrewMember& other) const {
+    return !(*this == other);
+}
 CCrewMember::~CCrewMember(){}
 

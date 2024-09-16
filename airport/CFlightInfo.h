@@ -6,7 +6,8 @@ public:
 
 	CFlightInfo(const std::string& destination,int flightNum, int flightDuration, int flightDistance);
 	CFlightInfo(const CFlightInfo& other);
-	std::string GetDest()const;
+	CFlightInfo() = delete;
+	const std::string& GetDest()const;
 	void SetDest(const std::string& newDest);
 	int GetFlightNum()const;
 	void SetFlightNum(int newFlightNum);
@@ -14,8 +15,9 @@ public:
 	void SetFlightDuration(int newFlightDur);
 	int GetFlightDistance()const;
 	void SetFlightDistance(int newFlightDist);
-	bool IsEqual(const CFlightInfo& other)const;
-	void Print()const;
+	friend std::ostream& operator<<(std::ostream& os, const CFlightInfo& flightInfo);
+	bool operator ==(const CFlightInfo& other)const;
+	bool operator !=(const CFlightInfo& other)const;
 	~CFlightInfo();
 
 

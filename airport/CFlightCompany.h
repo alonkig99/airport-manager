@@ -7,8 +7,9 @@ class CFlightCompany
 public:
 	CFlightCompany(const std::string& name);
 	CFlightCompany(const CFlightCompany& other);
+	CFlightCompany() = delete;
 
-	std::string GetName()const;
+	const std::string& GetName()const;
 	void SetName(std::string newName);
 	void Print()const;
 	~CFlightCompany();

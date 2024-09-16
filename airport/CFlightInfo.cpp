@@ -15,7 +15,7 @@ CFlightInfo::CFlightInfo(const CFlightInfo& other)
 {}
 
 
-string CFlightInfo::GetDest() const {
+const string& CFlightInfo::GetDest() const {
     return destination;
 }
 
@@ -47,16 +47,21 @@ void CFlightInfo::SetFlightDistance(int newFlightDist) {
     flightDistance = newFlightDist;
 }
 
-bool CFlightInfo::IsEqual(const CFlightInfo& other) const {
-    return this->flightNum == other.flightNum;
-}
 
-void CFlightInfo::Print() const {
-    cout << "Destination: " << destination
-        << ", Flight Number: " << flightNum
-        << ", Flight Duration: " << flightDuration << " minutes"
-        << ", Flight Distance: " << flightDistance << " km"
+ostream& operator<<(ostream & os, const CFlightInfo& flightInfo) {
+    os << "Destination: " << flightInfo.destination
+        << ",  Number: " << flightInfo.flightNum
+        << ", Duration: " << flightInfo.flightDuration << " minutes"
+        << ",  Distance: " << flightInfo.flightDistance << " km"
         << endl;
-}
 
+    return os;
+}
+bool CFlightInfo::operator==(const CFlightInfo& other)const {
+    return flightNum == other.flightNum;
+}
+bool CFlightInfo::operator!=(const CFlightInfo& other)const {
+    return !(*this == other);
+
+}
 CFlightInfo::~CFlightInfo() {}

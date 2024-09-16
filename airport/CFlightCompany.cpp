@@ -6,9 +6,10 @@ using namespace std;
 
 
 CFlightCompany::CFlightCompany(const string& name):name(name) {}
-CFlightCompany::CFlightCompany(const CFlightCompany& other):name(other.name) {}
+// copy constructor is not a must in this class
+//CFlightCompany::CFlightCompany(const CFlightCompany& other):name(other.name) {}
 
-string CFlightCompany::GetName()const {
+const string& CFlightCompany::GetName()const {
 	return name;
 }
 
