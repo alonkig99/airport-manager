@@ -10,7 +10,6 @@ public:
 	int GetSerialNum() const;
 	const std::string& GetModelName() const;
 	int GetNumSeats() const;
-	void Print() const;
 	friend std::ostream& operator<<(std::ostream& os, const CPlane& plane);
 	bool operator ==(const CPlane& other)const;
 	bool operator !=(const CPlane& other)const; 
