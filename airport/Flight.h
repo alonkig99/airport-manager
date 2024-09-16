@@ -2,6 +2,7 @@
 #include "CFlightInfo.h"
 #include "CPlane.h"
 #include "CCrewMember.h"
+#include <string>
 class Flight
 {
 public:
@@ -16,13 +17,14 @@ public:
 	// need to add a print function. 
 	bool operator ==(const Flight& other)const;
 	bool operator !=(const Flight& other)const;
-
+	Flight& operator=(const Flight& other);
+	bool exists(std::string memberName) const;
 
 private:
 	CFlightInfo flightInfo;
 	const CPlane* plane;
-	static const int MAX_CREW = 100;
-	CCrewMember* crewMembersArr[MAX_CREW];
+	static const int MAX_CREW = 50;
+	const CCrewMember* crewMembersArr[MAX_CREW];
 	int crewMembersCount;
 };
 
