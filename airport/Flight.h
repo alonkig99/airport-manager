@@ -19,6 +19,7 @@ public:
 	bool operator !=(const Flight& other)const;
 	Flight& operator=(const Flight& other);
 	bool exists(std::string memberName) const;
+	~Flight();
 
 private:
 	CFlightInfo flightInfo;

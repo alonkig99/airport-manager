@@ -94,3 +94,6 @@ bool Flight::UpdatePlane(const CPlane* newPlane) {
 //	}
 //	return *this;
 //}
+
+
+Flight::~Flight() {}
