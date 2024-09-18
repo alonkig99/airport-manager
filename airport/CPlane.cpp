@@ -3,17 +3,17 @@
 #include <iostream>
 using namespace std;
 
-int CPlane::serialNum = 100;
+int CPlane::serialNumCounter = 100;
 
 CPlane::CPlane(int numSeats, const string& modelName)
-    : mySerialNum(serialNum++), numSeats(numSeats), modelName(modelName){}
+    : serialNum(serialNumCounter++), numSeats(numSeats), modelName(modelName){}
 
 CPlane::CPlane(const CPlane& other)
-    : mySerialNum(other.mySerialNum), numSeats(other.numSeats), modelName(other.modelName){}
+    : serialNum(other.serialNum), numSeats(other.numSeats), modelName(other.modelName){}
 
  
     int CPlane::GetSerialNum() const{
-        return mySerialNum;
+        return serialNum;
     }
 
     const string& CPlane::GetModelName() const {
@@ -25,13 +25,13 @@ CPlane::CPlane(const CPlane& other)
     }
 
     ostream& operator<<(ostream& os, const CPlane& plane) {
-        os << "Serial number: " << plane.serialNum << ", Model name: " << plane.modelName << ", Number of seats: " << plane.numSeats << std::endl;
+        os << "Plane: " << plane.serialNum << ", Model name: " << plane.modelName << ", Number of seats: " << plane.numSeats << std::endl;
 
         return os;
    }
 
     bool  CPlane::operator ==(const CPlane& other)const {
-        return mySerialNum == other.mySerialNum;
+        return serialNum == other.serialNum;
     }
     bool CPlane::operator !=(const CPlane& other) const {
         return !(*this == other);
@@ -48,7 +48,4 @@ CPlane::CPlane(const CPlane& other)
         return temp;
     }
 
-    CPlane::~CPlane()
-    {
-
-    }
+    CPlane::~CPlane(){}

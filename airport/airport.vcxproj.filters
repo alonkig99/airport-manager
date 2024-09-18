@@ -30,7 +30,7 @@
     <ClInclude Include="CFlightCompany.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flight.h">
+    <ClInclude Include="CFlight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Flight.cpp">
+    <ClCompile Include="CFlight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

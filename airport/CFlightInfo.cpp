@@ -23,30 +23,31 @@ void CFlightInfo::SetDest(const string& newDest) {
     destination = newDest;
 }
 
-int CFlightInfo::GetFlightNum() const {
+int CFlightInfo::GetFNum() const {
     return flightNum;
 }
 
-void CFlightInfo::SetFlightNum(int newFlightNum) {
+void CFlightInfo::SetFNum(int newFlightNum) {
     flightNum = newFlightNum;
 }
 
-int CFlightInfo::GetFlightDuration() const {
+int CFlightInfo::GetFDuration() const {
     return flightDuration;
 }
 
-void CFlightInfo::SetFlightDuration(int newFlightDur) {
+void CFlightInfo::SetFDuration(int newFlightDur) {
     flightDuration = newFlightDur;
 }
 
-int CFlightInfo::GetFlightDistance() const {
+int CFlightInfo::GetFDistance() const {
     return flightDistance;
 }
 
-void CFlightInfo::SetFlightDistance(int newFlightDist) {
+void CFlightInfo::SetFDistance(int newFlightDist) {
     flightDistance = newFlightDist;
 }
 
+CFlightInfo::operator int() const { return flightDuration; }
 
 ostream& operator<<(ostream & os, const CFlightInfo& flightInfo) {
     os << "Destination: " << flightInfo.destination

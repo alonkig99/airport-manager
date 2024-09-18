@@ -19,8 +19,8 @@ public:
 	~CPlane();
 
 private:
-	static int serialNum;
-	int mySerialNum;
+	static int serialNumCounter;
+	int serialNum;
 	std::string modelName;
 	int numSeats;
 

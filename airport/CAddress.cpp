@@ -1,6 +1,7 @@
 #include "CAddress.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 CAddress::CAddress(int houseNumber,const string& streetName, const string& cityName)
@@ -9,7 +10,15 @@ CAddress::CAddress(int houseNumber,const string& streetName, const string& cityN
 CAddress::CAddress(const CAddress& other)
     : houseNumber(other.houseNumber), streetName(other.streetName), cityName(other.cityName){}
 
-
+void CAddress::SetCityName(const string& cityName) {
+    this->cityName = cityName;
+}
+void CAddress::SetStreetName(const string& streetName) {
+    this->streetName = streetName;
+}
+void CAddress::SetHouseNumber(int houseNumber) {
+    this->houseNumber = houseNumber;
+}
 const string& CAddress::GetCityName() const {
     return cityName;
 }
@@ -30,16 +39,30 @@ string CAddress::getCurrentAddress() const {
 
 
 ostream& operator<<(ostream& os, const CAddress& adr){
-  os << adr.streetName << "," << adr.houseNumber << ", " << adr.cityName << std::endl;
+  os << adr.streetName << "," << adr.houseNumber << ", " << adr.cityName << endl;
 
     return os;
 }
 
-istream& operator>> (istream& is, CAddress& adr) {
-
-    is >> adr.houseNumber >> adr.streetName >> adr.cityName;
-
+//istream& operator>> (istream& in, CAddress& adr) {
+//
+//    in >> adr.houseNumber >> adr.streetName >> adr.cityName;
+//    return in;
+//
+//}
+istream& operator>>(istream& in, CAddress& cAddress)
+{
+    cout << "Please enter house number street name and city name:" << endl;
+    in >> cAddress.houseNumber >> cAddress.streetName >> cAddress.cityName;
+    return in;
 }
+//istream& operator>> (istream& in, CAddress& adr) {
+//    in >> adr.houseNumber;
+//    in.ignore(); // Ignore the newline character after the number
+//    getline(in, adr.streetName); // Read the full street name including spaces
+//    getline(in, adr.cityName); // Read the full city name including spaces
+//    return in;
+//}
 
 //const CAddress& CAddress::operator=(const CAddress& other) {
 //
