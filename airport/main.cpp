@@ -16,7 +16,7 @@ int main()
 {
 
 	cout << endl << "Checking Address" << endl;
-	CAddress a(0, "", ""); // change from NULL to "" "" because NULL isn't valid for std::string
+	CAddress a(0, "", ""); 
 	cin >> a;
 	cout << a;
 

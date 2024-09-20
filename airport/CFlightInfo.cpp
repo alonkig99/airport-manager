@@ -6,14 +6,12 @@ using namespace std;
 
 
 CFlightInfo::CFlightInfo(const string& destination, int flightNum, int flightDuration, int flightDistance)
-    : destination(destination), flightNum(flightNum), flightDuration(flightDuration), flightDistance(flightDistance)
-{}
+    : destination(destination), flightNum(flightNum), flightDuration(flightDuration), flightDistance(flightDistance) {}
 
 
-CFlightInfo::CFlightInfo(const CFlightInfo& other)
-    : destination(other.destination), flightNum(other.flightNum), flightDuration(other.flightDuration), flightDistance(other.flightDistance)
-{}
-
+CFlightInfo::CFlightInfo(const CFlightInfo& other) {
+    *this = other;
+}
 
 const string& CFlightInfo::GetDest() const {
     return destination;
@@ -64,5 +62,20 @@ bool CFlightInfo::operator==(const CFlightInfo& other)const {
 bool CFlightInfo::operator!=(const CFlightInfo& other)const {
     return !(*this == other);
 
+}
+
+const CFlightInfo& CFlightInfo::operator=(const CFlightInfo& other) {
+
+    if (this != &other) {
+
+        SetDest(other.destination);
+        SetFNum(other.flightNum);
+        SetFDuration(other.flightDuration);
+        SetFDistance(other.flightDistance);
+       
+    }
+
+
+    return *this;
 }
 CFlightInfo::~CFlightInfo() {}

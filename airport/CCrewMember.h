@@ -8,26 +8,26 @@ class CCrewMember
 public:
 	static constexpr int START_ID = 1000;
 
-	CCrewMember(const std::string& name,/* const CAddress& address,*/ int totalAirTime = 0);
+	CCrewMember(const std::string& name,int totalAirTime = 0,const CAddress* address=nullptr);
 	CCrewMember(const CCrewMember& other);
 	CCrewMember() = delete;
-	//+= operator updates total air time
 	bool operator+=(int minutes);
 	const std::string& GetName()const;
 	void SetName(const std::string& newName);
-	//const CAddress& GetAddress()const;
+	const CAddress* GetAddress()const;
+	void SetAddress(const CAddress* newAddress);
     int GetID()const;
-	//void SetAddress(const CAddress& newAddress);
 	int GetAirTime()const;
 	bool operator==(const CCrewMember& other) const;
 	bool operator!=(const CCrewMember& other) const;
+	const CCrewMember& operator=(const CCrewMember& other);
     friend std::ostream& operator<<(std::ostream& os, const CCrewMember& member);
 	~CCrewMember();
 
 
 private:
 	std::string name;
-	//CAddress address;
+	CAddress* address;
 	int totalAirTime;
 	static int idCounter;
 	int memberID;

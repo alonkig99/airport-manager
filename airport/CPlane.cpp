@@ -8,8 +8,9 @@ int CPlane::serialNumCounter = 100;
 CPlane::CPlane(int numSeats, const string& modelName)
     : serialNum(serialNumCounter++), numSeats(numSeats), modelName(modelName){}
 
-CPlane::CPlane(const CPlane& other)
-    : serialNum(other.serialNum), numSeats(other.numSeats), modelName(other.modelName){}
+CPlane::CPlane(const CPlane& other){
+    *this = other;
+}
 
  
     int CPlane::GetSerialNum() const{
@@ -47,5 +48,17 @@ CPlane::CPlane(const CPlane& other)
         numSeats++;
         return temp;
     }
+
+     CPlane& CPlane::operator=(const CPlane& other) {
+
+         if (this != &other) {
+
+             this->serialNum = other.serialNum;
+             this->modelName = other.modelName;
+             this->numSeats = other.numSeats;
+         }
+
+         return *this;
+     }
 
     CPlane::~CPlane(){}

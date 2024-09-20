@@ -15,7 +15,7 @@ public:
 	bool operator !=(const CPlane& other)const; 
 	const CPlane& operator++();
 	 CPlane operator++(int);
-
+	 CPlane& operator=(const CPlane& other);
 	~CPlane();
 
 private:

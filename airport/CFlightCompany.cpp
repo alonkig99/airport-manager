@@ -8,16 +8,10 @@
 using namespace std;
 
 
-CFlightCompany::CFlightCompany(const string& name):name(name) {
+CFlightCompany::CFlightCompany(const string& name):name(name) {}
 
-	for (int i = 0; i < MAX_CREWS; i++)
-		membersArr[i] = nullptr;
-
-	for (int i = 0; i < MAX_FLIGHT; i++)
-		flightsArr[i] = nullptr;
-
-	for (int i = 0; i < MAX_PLANES; i++)
-		planesArr[i] = nullptr;
+CFlightCompany::CFlightCompany(const CFlightCompany& other) {
+	
 }
 
 bool CFlightCompany::AddCrewMember(const CCrewMember& newMember) {
@@ -113,6 +107,44 @@ CCrewMember* CFlightCompany::getMemberByID(int id)const {
 void CFlightCompany::AddCrewToFlight(int flightNum, int memberID) {
 	*getFlightByNum(flightNum) = *getFlightByNum(flightNum) + *getMemberByID(memberID);
 
+}
+const CFlightCompany& CFlightCompany::operator=(const CFlightCompany& other) {
+	if (this != &other) {
+	
+		for (int i = 0; i < membersCount; i++) {
+			delete membersArr[i];
+		}
+		for (int i = 0; i < flightsCount; i++) {
+			delete flightsArr[i];
+		}
+		for (int i = 0; i < planesCount; i++) {
+			delete planesArr[i];
+		}
+
+		name = other.name;
+
+	
+		membersCount = other.membersCount;
+		flightsCount = other.flightsCount;
+		planesCount = other.planesCount;
+
+	
+		for (int i = 0; i < membersCount; i++) {
+			membersArr[i] = new CCrewMember(*other.membersArr[i]);
+		}
+
+	
+		for (int i = 0; i < flightsCount; i++) {
+			flightsArr[i] = new CFlight(*other.flightsArr[i]);
+		}
+
+	
+		for (int i = 0; i < planesCount; i++) {
+			planesArr[i] = new CPlane(*other.planesArr[i]);
+		}
+	}
+
+	return *this;
 }
 
 CFlightCompany::~CFlightCompany() {

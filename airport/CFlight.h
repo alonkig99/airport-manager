@@ -11,19 +11,18 @@ public:
 	CFlight() = delete;
 	void SetPlane(const CPlane* newPlane);
 	const CFlightInfo& GetFlightInfo();
-	// can be used as flight = flight + crewMember and flight = crewMember + flight
 	friend CFlight operator+(const CCrewMember& newMember, const CFlight& flight);
 	friend CFlight operator+(const CFlight& flight, const CCrewMember& newMember);
 	friend std::ostream& operator<<(std::ostream& os, const CFlight& flight);
 	bool operator ==(const CFlight& other)const;
 	bool operator !=(const CFlight& other)const;
-	//CFlight& operator=(const CFlight& other);
+	const CFlight& operator=(const CFlight& other);
 	bool exists(std::string memberName) const;
 	~CFlight();
 
 private:
-	/*Note : plane and CCrewMember are const pointers pointing to existing plane and crew members,
-	 without the ability to alter the original objects by dereferencing.*/
+	/*Note : plane and CCrewMember are const pointers pointing to existing plane and crew members
+	without copying*/
 	CFlightInfo flightInfo;
 	const CPlane* plane;
 	static constexpr int MAX_CREW = 20;

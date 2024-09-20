@@ -15,7 +15,7 @@ public:
    void SetStreetName(const std::string& streetName);
    void SetHouseNumber(int houseNumber);
    std::string getCurrentAddress() const;
-  //const CAddress& operator=(const CAddress& other);
+  const CAddress& operator=(const CAddress& other);
   bool operator ==(const CAddress& other)const;
   bool operator !=(const CAddress& other)const;
   int GetHouseNumber() const;

@@ -20,6 +20,8 @@ public:
 	bool AddFlight(const CFlight& newFlight);
 	const CPlane* GetPlane(int index)const;
 	void AddCrewToFlight(int flightNum, int memberID);
+	const CFlightCompany& operator=(const CFlightCompany& other);
+
 	
 
 private:
@@ -33,9 +35,8 @@ private:
 	int planesCount=0;
 	int membersCount=0;
 	int flightsCount=0;
-
+	// internal helper functions:
 	 CFlight* getFlightByNum(int num)const;
-
 	 CCrewMember* getMemberByID(int id)const;
 
 };

@@ -22,6 +22,7 @@ public:
 	operator int() const;
 	bool operator ==(const CFlightInfo& other)const;
 	bool operator !=(const CFlightInfo& other)const;
+	const CFlightInfo& operator=(const CFlightInfo& other);
 	~CFlightInfo();
 
 
