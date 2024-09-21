@@ -30,8 +30,8 @@
 # Rider
 .idea/
 
-# VS Code
-.vscode/
+# VS 
+.vs/
 
 # NuGet Packages
 *.nupkg
