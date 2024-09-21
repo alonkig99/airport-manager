@@ -5,14 +5,22 @@ using namespace std;
 
 int CPlane::serialNumCounter = 100;
 
+/* =====================================
+   constructors&destructor
+   ===================================== */
+
 CPlane::CPlane(int numSeats, const string& modelName)
     : serialNum(serialNumCounter++), numSeats(numSeats), modelName(modelName){}
 
 CPlane::CPlane(const CPlane& other){
     *this = other;
 }
+CPlane::~CPlane() {}
 
- 
+/* =====================================
+  getters&setters
+  ===================================== */
+
     int CPlane::GetSerialNum() const{
         return serialNum;
     }
@@ -24,6 +32,12 @@ CPlane::CPlane(const CPlane& other){
     int CPlane::GetNumSeats() const {
         return numSeats;
     }
+
+
+  /* =====================================
+     operator overloading
+     ===================================== */
+
 
     ostream& operator<<(ostream& os, const CPlane& plane) {
         os << "Plane: " << plane.serialNum << ", Model name: " << plane.modelName << ", Number of seats: " << plane.numSeats << std::endl;
@@ -38,11 +52,12 @@ CPlane::CPlane(const CPlane& other){
         return !(*this == other);
     }
 
-    // adding a seat to the plane with either postfix or prefix
+    //prefix add seat to plane
     const CPlane& CPlane::operator++() {
         ++numSeats;
         return *this;
     }
+    //postfix add seat to plane
      CPlane CPlane::operator++(int) { 
          CPlane temp(*this); 
         numSeats++;
@@ -61,4 +76,3 @@ CPlane::CPlane(const CPlane& other){
          return *this;
      }
 
-    CPlane::~CPlane(){}

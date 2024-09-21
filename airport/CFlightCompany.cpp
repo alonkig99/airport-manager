@@ -7,55 +7,47 @@
 
 using namespace std;
 
+/* =====================================
+   constructors&destructor
+   ===================================== */
+CFlightCompany::CFlightCompany(const string& name):name(name),planesCount(0),membersCount(0),flightsCount(0) {}
 
-CFlightCompany::CFlightCompany(const string& name):name(name) {}
-
-CFlightCompany::CFlightCompany(const CFlightCompany& other) {
-	
+CFlightCompany::CFlightCompany(const CFlightCompany& other)
+	: name(other.name), membersCount(other.membersCount),
+	flightsCount(other.flightsCount), planesCount(other.planesCount) {
+	for (int i = 0; i < membersCount; i++) {
+		membersArr[i] = new CCrewMember(*other.membersArr[i]);
+	}
+	for (int i = 0; i < flightsCount; i++) {
+		flightsArr[i] = new CFlight(*other.flightsArr[i]);
+	}
+	for (int i = 0; i < planesCount; i++) {
+		planesArr[i] = new CPlane(*other.planesArr[i]);
+	}
 }
 
-bool CFlightCompany::AddCrewMember(const CCrewMember& newMember) {
-	if (membersCount >= MAX_CREWS) return false;
-
-	for (int i = 0; i < membersCount; i++) 
-		if (*membersArr[i] == newMember) return false; // == compares crewMembers by memberID.
-	
-	membersArr[membersCount] = new CCrewMember(newMember);
-	membersCount++;
-	return true;
-
-}
-bool CFlightCompany::AddPlane(const CPlane& newPlane) {
-
-	if (planesCount >= MAX_PLANES) return false;
-
-	for (int i = 0; i < planesCount; i++)
-		if (*planesArr[i] == newPlane) return false; // == compares planes by serialNumber.
-
-	planesArr[planesCount] = new CPlane(newPlane);
-	planesCount++;
-	return true;
-
-}
-bool CFlightCompany::AddFlight(const CFlight& newFlight) {
-
-
-
-	if (flightsCount >= MAX_FLIGHT) return false;
+CFlightCompany::~CFlightCompany() {
+	for (int i = 0; i < membersCount; i++)
+		delete membersArr[i];
 
 	for (int i = 0; i < flightsCount; i++)
-		if (*flightsArr[i] == newFlight) return false; // == compares flights by flightInfo.
+		delete flightsArr[i];
 
-	flightsArr[flightsCount] = new CFlight(newFlight);
-	flightsCount++;
-	return true;
+	for (int i = 0; i < planesCount; i++)
+		delete planesArr[i];
 
 }
+
+/* =====================================
+   getters&setters
+   ===================================== */
+
+
 const CPlane* CFlightCompany::GetPlane(int index) const {
+	if (index < 0 || index >= planesCount) return nullptr;
 	return planesArr[index];
 
 }
-
 
 const string& CFlightCompany::GetName()const {
 	return name;
@@ -64,6 +56,10 @@ const string& CFlightCompany::GetName()const {
 void CFlightCompany::SetName(string newName) {
 	name = newName;
 }
+
+/* =====================================
+   operator overloading
+   ===================================== */
 
 ostream& operator<<(ostream& os, const CFlightCompany& flightCompany) {
     os << "Flight company: " << flightCompany.name << endl
@@ -86,6 +82,29 @@ ostream& operator<<(ostream& os, const CFlightCompany& flightCompany) {
     return os; 
 }
 
+const CFlightCompany& CFlightCompany::operator=(const CFlightCompany& other) {
+	if (this != &other) {
+
+		for (int i = 0; i < membersCount; i++) {delete membersArr[i];}
+		for (int i = 0; i < flightsCount; i++) {delete flightsArr[i];}
+		for (int i = 0; i < planesCount; i++) {delete planesArr[i];}
+
+		name = other.name;
+		membersCount = other.membersCount;
+		flightsCount = other.flightsCount;
+		planesCount = other.planesCount;
+
+		for (int i = 0; i < membersCount; i++) {membersArr[i] = new CCrewMember(*other.membersArr[i]);}
+		for (int i = 0; i < flightsCount; i++) {flightsArr[i] = new CFlight(*other.flightsArr[i]);}
+		for (int i = 0; i < planesCount; i++) {planesArr[i] = new CPlane(*other.planesArr[i]);}
+	}
+
+	return *this;
+}
+
+/* =====================================
+   other methods
+   ===================================== */
 CFlight* CFlightCompany::getFlightByNum(int num)const {
 	for (int i = 0; i < flightsCount; i++){
 		if (flightsArr[i]->GetFlightInfo().GetFNum() == num)
@@ -108,54 +127,40 @@ void CFlightCompany::AddCrewToFlight(int flightNum, int memberID) {
 	*getFlightByNum(flightNum) = *getFlightByNum(flightNum) + *getMemberByID(memberID);
 
 }
-const CFlightCompany& CFlightCompany::operator=(const CFlightCompany& other) {
-	if (this != &other) {
-	
-		for (int i = 0; i < membersCount; i++) {
-			delete membersArr[i];
-		}
-		for (int i = 0; i < flightsCount; i++) {
-			delete flightsArr[i];
-		}
-		for (int i = 0; i < planesCount; i++) {
-			delete planesArr[i];
-		}
 
-		name = other.name;
 
-	
-		membersCount = other.membersCount;
-		flightsCount = other.flightsCount;
-		planesCount = other.planesCount;
+bool CFlightCompany::AddCrewMember(const CCrewMember& newMember) {
+	if (membersCount >= MAX_CREWS) return false;
 
-	
-		for (int i = 0; i < membersCount; i++) {
-			membersArr[i] = new CCrewMember(*other.membersArr[i]);
-		}
-
-	
-		for (int i = 0; i < flightsCount; i++) {
-			flightsArr[i] = new CFlight(*other.flightsArr[i]);
-		}
-
-	
-		for (int i = 0; i < planesCount; i++) {
-			planesArr[i] = new CPlane(*other.planesArr[i]);
-		}
-	}
-
-	return *this;
-}
-
-CFlightCompany::~CFlightCompany() {
 	for (int i = 0; i < membersCount; i++)
-		delete membersArr[i];
+		if (*membersArr[i] == newMember) return false; // == compares crewMembers by memberID.
 
-	for (int i = 0; i < flightsCount; i++)
-		delete flightsArr[i];
+	membersArr[membersCount] = new CCrewMember(newMember);
+	membersCount++;
+	return true;
+
+}
+bool CFlightCompany::AddPlane(const CPlane& newPlane) {
+
+	if (planesCount >= MAX_PLANES) return false;
 
 	for (int i = 0; i < planesCount; i++)
-		delete planesArr[i];
+		if (*planesArr[i] == newPlane) return false; // == compares planes by serialNumber.
 
+	planesArr[planesCount] = new CPlane(newPlane);
+	planesCount++;
+	return true;
+
+}
+bool CFlightCompany::AddFlight(const CFlight& newFlight) {
+
+	if (flightsCount >= MAX_FLIGHT) return false;
+
+	for (int i = 0; i < flightsCount; i++)
+		if (*flightsArr[i] == newFlight) return false; // == compares flights by flightInfo.
+
+	flightsArr[flightsCount] = new CFlight(newFlight);
+	flightsCount++;
+	return true;
 
 }

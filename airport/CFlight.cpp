@@ -3,13 +3,15 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
+/* =====================================
+   constructors&destructor
+   ===================================== */
+
 CFlight::CFlight(CFlightInfo flightInfo, const CPlane* plane):flightInfo(flightInfo), plane(plane), crewMembersCount(0){
 	for (int i = 0; i < MAX_CREW; i++) 
 		crewMembersArr[i] = nullptr;
-	
-
 }
-
 
 CFlight::CFlight(const CFlight& other) :flightInfo(other.flightInfo), plane(other.plane), crewMembersCount(other.crewMembersCount) {
 	for (int i = 0; i < MAX_CREW; i++)
@@ -17,15 +19,28 @@ CFlight::CFlight(const CFlight& other) :flightInfo(other.flightInfo), plane(othe
 
 	for (int i = 0; i < crewMembersCount; i++)
 		crewMembersArr[i] = other.crewMembersArr[i];
+}
+
+CFlight::~CFlight() {}
+
+
+/* =====================================
+   getters&setters
+   ===================================== */
+
+void CFlight::SetPlane(const CPlane* newPlane) {
+	plane = newPlane;
+
+}
+const CFlightInfo& CFlight::GetFlightInfo() {
+	return flightInfo;
 
 }
 
-bool CFlight::exists(string memberName) const {
-	for (int i = 0; i < crewMembersCount; i++) {
-		if (crewMembersArr[i]->GetName() == memberName) return true;
-	}
-	return false;
-}
+
+/* =====================================
+   operator overloading
+   ===================================== */
 
  CFlight operator+(const CCrewMember& newMember, const CFlight& flight) {
 	 CFlight flt(flight);
@@ -76,14 +91,7 @@ bool CFlight::operator !=(const CFlight& other)const {
 	return !(*this == other);
 }
 
-void CFlight::SetPlane(const CPlane* newPlane) {
-	plane = newPlane;
-	
-}
-const CFlightInfo& CFlight::GetFlightInfo() {
-	return flightInfo;
 
-}
 
 const CFlight& CFlight::operator=(const CFlight& other) {
 	if (this != &other) {
@@ -102,5 +110,13 @@ const CFlight& CFlight::operator=(const CFlight& other) {
 	return *this;
 }
 
+/* =====================================
+   *
+   ===================================== */
 
-CFlight::~CFlight() {}
+bool CFlight::exists(string memberName) const {
+	for (int i = 0; i < crewMembersCount; i++) {
+		if (crewMembersArr[i]->GetName() == memberName) return true;
+	}
+	return false;
+}

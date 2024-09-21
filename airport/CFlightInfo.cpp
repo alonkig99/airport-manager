@@ -4,14 +4,24 @@
 
 using namespace std;
 
+/* =====================================
+   constructors&destructor
+   ===================================== */
 
 CFlightInfo::CFlightInfo(const string& destination, int flightNum, int flightDuration, int flightDistance)
-    : destination(destination), flightNum(flightNum), flightDuration(flightDuration), flightDistance(flightDistance) {}
+    : destination(destination), flightNum(flightNum),  flightDuration(flightDuration), flightDistance(flightDistance) {}
 
 
 CFlightInfo::CFlightInfo(const CFlightInfo& other) {
     *this = other;
 }
+
+CFlightInfo::~CFlightInfo() {}
+
+
+/* =====================================
+   getters&setters
+   ===================================== */
 
 const string& CFlightInfo::GetDest() const {
     return destination;
@@ -45,6 +55,10 @@ void CFlightInfo::SetFDistance(int newFlightDist) {
     flightDistance = newFlightDist;
 }
 
+/* =====================================
+   operator overloading
+   ===================================== */
+
 CFlightInfo::operator int() const { return flightDuration; }
 
 ostream& operator<<(ostream & os, const CFlightInfo& flightInfo) {
@@ -67,15 +81,11 @@ bool CFlightInfo::operator!=(const CFlightInfo& other)const {
 const CFlightInfo& CFlightInfo::operator=(const CFlightInfo& other) {
 
     if (this != &other) {
-
         SetDest(other.destination);
         SetFNum(other.flightNum);
         SetFDuration(other.flightDuration);
-        SetFDistance(other.flightDistance);
-       
+        SetFDistance(other.flightDistance);   
     }
-
-
     return *this;
 }
-CFlightInfo::~CFlightInfo() {}
+

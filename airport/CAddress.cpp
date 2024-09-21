@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/* =====================================
+   constructors&destructor
+   ===================================== */
+
 CAddress::CAddress(int houseNumber,const string& streetName, const string& cityName)
     :houseNumber(houseNumber),streetName(streetName),cityName(cityName){}
 
@@ -11,9 +15,16 @@ CAddress::CAddress(const CAddress& other){
     *this = other;
 }
 
+CAddress::~CAddress() {}
+
+/* =====================================
+   getters&setters
+   ===================================== */
+
 void CAddress::SetCityName(const string& cityName) {
     this->cityName = cityName;
 }
+
 void CAddress::SetStreetName(const string& streetName) {
     this->streetName = streetName;
 }
@@ -37,7 +48,9 @@ string CAddress::getCurrentAddress() const {
         return res;
 }
 
-
+/* =====================================
+   operator overloading
+   ===================================== */
 
 ostream& operator<<(ostream& os, const CAddress& adr){
   os << adr.streetName << "," << adr.houseNumber << ", " << adr.cityName << endl;
@@ -68,6 +81,10 @@ bool  CAddress::operator ==(const CAddress& other)const {
 bool CAddress::operator !=(const CAddress& other) const {
     return !(*this == other);
 }
+
+/* =====================================
+   other methods
+   ===================================== */
 void CAddress::UpdateAddress(const string& newCity, const string& newStreet, int newHouseNum) {
 
     SetCityName(newCity);
@@ -75,6 +92,6 @@ void CAddress::UpdateAddress(const string& newCity, const string& newStreet, int
     SetHouseNumber(newHouseNum);
 }
 
-CAddress::~CAddress(){}
+
 
 

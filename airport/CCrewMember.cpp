@@ -7,6 +7,10 @@ using namespace std;
 
 int CCrewMember::idCounter = START_ID;
 
+/* =====================================
+   constructors&destructor
+   ===================================== */
+
 CCrewMember::CCrewMember(const string& name, int totalAirTime, const CAddress* address)
 	:memberID(idCounter++),name(name), totalAirTime(totalAirTime) {
 
@@ -17,15 +21,15 @@ CCrewMember::CCrewMember(const string& name, int totalAirTime, const CAddress* a
 CCrewMember::CCrewMember(const CCrewMember& other) {
     *this = other;
 }
-
-
-bool CCrewMember::operator+=(int minutes) {
-    if (minutes > 0) {
-        totalAirTime += minutes;
-        return true;
-    }
-    return false;
+CCrewMember::~CCrewMember() {
+    delete address;
 }
+
+
+/* =====================================
+   getters&setters
+   ===================================== */
+
 const string& CCrewMember::GetName()const {
     return name;
 }
@@ -54,6 +58,19 @@ int CCrewMember::GetAirTime()const {
     return totalAirTime;
 }
 
+
+/* =====================================
+   operator overloading
+   ===================================== */
+
+bool CCrewMember::operator+=(int minutes) {
+    if (minutes > 0) {
+        totalAirTime += minutes;
+        return true;
+    }
+    return false;
+}
+
 ostream& operator<<(ostream& os, const CCrewMember& member) {
     os << "Crewmember: " << member.name << ", total airtime: " << member.totalAirTime << endl;
     return os;
@@ -66,7 +83,6 @@ bool CCrewMember::operator!=(const CCrewMember& other) const {
     return !(*this == other);
 }
 
-
 const CCrewMember& CCrewMember::operator=(const CCrewMember& other) {
 
     if (this != &other) {
@@ -77,7 +93,5 @@ const CCrewMember& CCrewMember::operator=(const CCrewMember& other) {
     }
     return *this;
 }
-CCrewMember::~CCrewMember(){
-    delete address;
-}
+
 

@@ -7,21 +7,26 @@
 class CFlightCompany
 {
 public:
+	//constructors&destructor
 	CFlightCompany(const std::string& name);
 	CFlightCompany(const CFlightCompany& other);
 	CFlightCompany() = delete;
+	~CFlightCompany();
 
+	//getters&setters
 	const std::string& GetName()const;
 	void SetName(std::string newName);
+	const CPlane* GetPlane(int index)const;
+
+	//operator overloading
 	friend std::ostream& operator<<(std::ostream& os, const CFlightCompany& flightCompany);
-	~CFlightCompany();
+	const CFlightCompany& operator=(const CFlightCompany& other);
+
+	//other methods
 	bool AddCrewMember(const CCrewMember& newMember); 
 	bool AddPlane(const CPlane& newPlane);
 	bool AddFlight(const CFlight& newFlight);
-	const CPlane* GetPlane(int index)const;
 	void AddCrewToFlight(int flightNum, int memberID);
-	const CFlightCompany& operator=(const CFlightCompany& other);
-
 	
 
 private:
@@ -29,12 +34,12 @@ private:
 	static constexpr int MAX_CREWS = 50;
 	static constexpr int MAX_PLANES = 50;
 	static constexpr int MAX_FLIGHT = 50;
-	CPlane* planesArr[MAX_PLANES];
-	CCrewMember* membersArr[MAX_CREWS];
-	CFlight* flightsArr[MAX_FLIGHT];
-	int planesCount=0;
-	int membersCount=0;
-	int flightsCount=0;
+	CPlane* planesArr[MAX_PLANES] = { nullptr };
+	CCrewMember* membersArr[MAX_CREWS] = { nullptr };
+	CFlight* flightsArr[MAX_FLIGHT] = { nullptr };
+	int planesCount;
+	int membersCount;
+	int flightsCount;
 	// internal helper functions:
 	 CFlight* getFlightByNum(int num)const;
 	 CCrewMember* getMemberByID(int id)const;
