@@ -6,19 +6,20 @@
 class CFlight
 {
 public:
+
 	//constructors&destructor
-	CFlight(CFlightInfo flightInfo, const CPlane* plane= nullptr);
+	CFlight(CFlightInfo flightInfo, CPlane* plane= nullptr);
 	CFlight(const CFlight& other);
 	CFlight() = delete;
 	~CFlight();
 
 	//getters&setters
-	void SetPlane(const CPlane* newPlane);
+	void SetPlane(CPlane* newPlane);
 	const CFlightInfo& GetFlightInfo();
 
 	//operator overloading
-	friend CFlight operator+(const CCrewMember& newMember, const CFlight& flight);
-	friend CFlight operator+(const CFlight& flight, const CCrewMember& newMember);
+	friend CFlight operator+(CCrewMember* newMember, CFlight& flight);
+	friend CFlight operator+(CFlight& flight, CCrewMember* newMember);
 	friend std::ostream& operator<<(std::ostream& os, const CFlight& flight);
 	bool operator ==(const CFlight& other)const;
 	bool operator !=(const CFlight& other)const;
@@ -26,15 +27,17 @@ public:
 
 	//other methods
 	bool exists(std::string memberName) const;
-	
+	bool TakeOff();
+	bool VerifyPlane() const;
+	bool VerifyCargo() const;
 
 private:
 	/*Note : plane and CCrewMember are const pointers pointing to 
 	existing plane and crew members without alocating heap memory*/
 	CFlightInfo flightInfo;
-	const CPlane* plane;
+	 CPlane* plane;
 	static constexpr int MAX_CREW = 20;
-	const CCrewMember* crewMembersArr[MAX_CREW];
+	 CCrewMember* crewMembersArr[MAX_CREW];
 	int crewMembersCount;
 };
 

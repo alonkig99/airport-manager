@@ -33,6 +33,15 @@
     <ClInclude Include="CFlight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CPilot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CHost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCargo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp">
@@ -54,6 +63,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CFlight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPilot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CHost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCargo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

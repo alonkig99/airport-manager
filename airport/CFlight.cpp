@@ -1,5 +1,8 @@
 #include "CFlight.h"
 #include "CFlightInfo.h"
+#include "CPilot.h"
+#include "CHost.h"
+#include "CCargo.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -8,7 +11,7 @@ using namespace std;
    constructors&destructor
    ===================================== */
 
-CFlight::CFlight(CFlightInfo flightInfo, const CPlane* plane):flightInfo(flightInfo), plane(plane), crewMembersCount(0){
+CFlight::CFlight(CFlightInfo flightInfo, CPlane* plane):flightInfo(flightInfo), plane(plane), crewMembersCount(0){
 	for (int i = 0; i < MAX_CREW; i++) 
 		crewMembersArr[i] = nullptr;
 }
@@ -28,7 +31,7 @@ CFlight::~CFlight() {}
    getters&setters
    ===================================== */
 
-void CFlight::SetPlane(const CPlane* newPlane) {
+void CFlight::SetPlane(CPlane* newPlane) {
 	plane = newPlane;
 
 }
@@ -42,17 +45,25 @@ const CFlightInfo& CFlight::GetFlightInfo() {
    operator overloading
    ===================================== */
 
- CFlight operator+(const CCrewMember& newMember, const CFlight& flight) {
-	 CFlight flt(flight);
-	 if (flt.crewMembersCount < flt.MAX_CREW && !flt.exists(newMember.GetName())) {
-		 flt.crewMembersArr[flt.crewMembersCount++] = &newMember;
-	
-	 }
-	 return flt;
+ CFlight operator+(CCrewMember* newMember, CFlight& flight) {
+
+	 return flight +newMember;
 }
 
- CFlight operator+(const CFlight& flight, const CCrewMember& newMember) {
-	 return newMember + flight;
+
+ CFlight operator+(CFlight& flight,CCrewMember* newMember) {
+
+	 if (flight.crewMembersCount >= CFlight::MAX_CREW)
+		 return flight;
+
+	 for (int i = 0; i < flight.crewMembersCount; i++)
+	 {
+		 if (flight.crewMembersArr[i] == newMember)
+			 return flight;
+	 }
+
+	 flight.crewMembersArr[flight.crewMembersCount++] = newMember;
+	 return flight;
 
 }
 ostream& operator<<(ostream& os, const CFlight& flight) {
@@ -119,4 +130,60 @@ bool CFlight::exists(string memberName) const {
 		if (crewMembersArr[i]->GetName() == memberName) return true;
 	}
 	return false;
+}
+
+
+
+bool CFlight::VerifyPlane() const {
+	CHost* host = nullptr;
+	int isOnePilot = 0, isSuperHost = 0;
+
+	for (int i = 0; i < crewMembersCount; i++)
+	{
+		if (typeid(*crewMembersArr[i]) == typeid(CPilot))
+		{
+			if (isOnePilot == 1)
+				return false;
+			isOnePilot = 1;
+		}
+		else
+		{
+			host = dynamic_cast<CHost*>(crewMembersArr[i]);
+			if (host && host->GetHostType() == CHost::eSuper)
+			{
+				if (isSuperHost == 1)
+					return false;
+				isSuperHost = 1;
+			}
+		}
+	}
+	return isOnePilot == 1;
+}
+
+bool CFlight::VerifyCargo() const {
+	for (int i = 0; i < crewMembersCount; i++)
+	{
+		if (typeid(*crewMembersArr[i]) == typeid(CPilot))
+			return true;
+	}
+
+	return false;
+}
+
+
+
+bool CFlight::TakeOff()
+{
+	int minutes = flightInfo.GetFDuration();
+
+	if (!this->plane|| (typeid(*this->plane) == typeid(CPlane) && !VerifyPlane()) ||
+		(typeid(*this->plane) == typeid(CCargo) && !VerifyCargo()))
+		return false;
+
+	for (int i = 0; i < crewMembersCount; i++)
+		crewMembersArr[i]->TakeOff(minutes);
+
+	this->plane->TakeOff(minutes);
+
+	return true;
 }

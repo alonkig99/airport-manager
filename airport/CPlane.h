@@ -4,10 +4,10 @@ class CPlane
 {
 public:
 	//constructors&destructor
-	CPlane(int NumSeats, const std::string& ModelName);
+	CPlane(int numSeats, const std::string& ModelName);
 	CPlane(const CPlane& other);
 	CPlane() = delete;
-	~CPlane();
+	virtual ~CPlane();
 
 	//getters
 	int GetSerialNum() const;
@@ -21,9 +21,15 @@ public:
 	const CPlane& operator++();
 	 CPlane operator++(int);
 	 CPlane& operator=(const CPlane& other);
+
+
+
+	 ////////////////////
+	 virtual void ToOs(std::ostream& os) const;
+	 virtual void TakeOff(int minutes) const {};
 	
 
-private:
+protected:
 	static int serialNumCounter;
 	int serialNum;
 	std::string modelName;

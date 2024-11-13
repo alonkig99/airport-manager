@@ -5,26 +5,18 @@
 
 using namespace std;
 
-int CCrewMember::idCounter = START_ID;
 
 /* =====================================
    constructors&destructor
    ===================================== */
 
-CCrewMember::CCrewMember(const string& name, int totalAirTime, const CAddress* address)
-	:memberID(idCounter++),name(name), totalAirTime(totalAirTime) {
-
-    SetAddress(address);
-
-}
+CCrewMember::CCrewMember(const string& name, int totalAirTime)
+	: name(name), totalAirTime(totalAirTime) {}
 
 CCrewMember::CCrewMember(const CCrewMember& other) {
     *this = other;
 }
-CCrewMember::~CCrewMember() {
-    delete address;
-}
-
+CCrewMember::~CCrewMember() {}
 
 /* =====================================
    getters&setters
@@ -33,26 +25,13 @@ CCrewMember::~CCrewMember() {
 const string& CCrewMember::GetName()const {
     return name;
 }
-int CCrewMember::GetID()const {
-    return memberID;
-}
+
 void CCrewMember::SetName(const string& newName) {
     name = newName;
 }
 
-const CAddress* CCrewMember::GetAddress()const {
-    return address;
-}
 
-void CCrewMember::SetAddress(const CAddress* newAddress) {
 
-    if (newAddress != nullptr) {
-        if (address != newAddress) { //self address assignment check
-            delete address;
-            address = new CAddress(*newAddress);
-        }
-    }
-}
 
 int CCrewMember::GetAirTime()const {
     return totalAirTime;
@@ -72,11 +51,13 @@ bool CCrewMember::operator+=(int minutes) {
 }
 
 ostream& operator<<(ostream& os, const CCrewMember& member) {
-    os << "Crewmember: " << member.name << ", total airtime: " << member.totalAirTime << endl;
+    os << typeid(member).name() + 7 << " ";
+    member.ToOs(os);
     return os;
 }
 bool CCrewMember::operator==(const CCrewMember& other) const {
-    return memberID == other.memberID;
+  
+    return name == other.name;
 
 }
 bool CCrewMember::operator!=(const CCrewMember& other) const {
@@ -86,12 +67,21 @@ bool CCrewMember::operator!=(const CCrewMember& other) const {
 const CCrewMember& CCrewMember::operator=(const CCrewMember& other) {
 
     if (this != &other) {
-        SetAddress(other.GetAddress());
         SetName(other.name);
-        this->memberID =other.memberID;
         this->totalAirTime = other.totalAirTime;
     }
     return *this;
 }
 
+////////////////////////
+
+void CCrewMember::GetPresent() const
+{
+    cout << name << " thanking the company for receiving the holiday gift" << endl;
+}
+
+void CCrewMember::TakeOff(int minutes) {
+
+    totalAirTime += minutes;
+}
 

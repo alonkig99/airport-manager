@@ -16,7 +16,7 @@ public:
 	//getters&setters
 	const std::string& GetName()const;
 	void SetName(std::string newName);
-	const CPlane* GetPlane(int index)const;
+	 CPlane* GetPlane(int index)const;
 
 	//operator overloading
 	friend std::ostream& operator<<(std::ostream& os, const CFlightCompany& flightCompany);
@@ -26,7 +26,17 @@ public:
 	bool AddCrewMember(const CCrewMember& newMember); 
 	bool AddPlane(const CPlane& newPlane);
 	bool AddFlight(const CFlight& newFlight);
-	void AddCrewToFlight(int flightNum, int memberID);
+	void AddCrewToFlight(int flightNum, int memberIndex);
+
+	///////////////////////////
+
+	int GetCargoCount() const;
+	void CrewGetPresent() const;
+	void PilotsToSimulator() const;
+	void CrewGetUniform() const;
+    bool TakeOff(int flightNum) const;
+	CFlight* GetFlightByNum(int num)const;
+	CCrewMember* GetCrewMember(int index);
 	
 
 private:
@@ -40,9 +50,10 @@ private:
 	int planesCount;
 	int membersCount;
 	int flightsCount;
-	// internal helper functions:
-	 CFlight* getFlightByNum(int num)const;
-	 CCrewMember* getMemberByID(int id)const;
+
+
+
+
 
 };
 

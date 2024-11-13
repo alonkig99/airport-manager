@@ -40,8 +40,8 @@ CPlane::~CPlane() {}
 
 
     ostream& operator<<(ostream& os, const CPlane& plane) {
-        os << "Plane: " << plane.serialNum << ", Model name: " << plane.modelName << ", Number of seats: " << plane.numSeats << std::endl;
-
+        os << "Plane: " << plane.serialNum << " Model " << plane.modelName << " seats " << plane.numSeats << std::endl;
+        plane.ToOs(os);
         return os;
    }
 
@@ -75,4 +75,8 @@ CPlane::~CPlane() {}
 
          return *this;
      }
+
+
+     ///////////////////////
+     void CPlane::ToOs(std::ostream& os) const {}
 

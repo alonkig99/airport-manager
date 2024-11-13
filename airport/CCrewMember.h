@@ -6,37 +6,40 @@
 class CCrewMember
 {
 public:
-	static constexpr int START_ID = 1000;
+
 
 	//constructors&destructor
-	CCrewMember(const std::string& name,int totalAirTime = 0,const CAddress* address=nullptr);
+	CCrewMember(const std::string& name,int totalAirTime = 0);
 	CCrewMember(const CCrewMember& other);
 	CCrewMember() = delete;
-	~CCrewMember();
+	virtual ~CCrewMember();
 
 	//getters&setters
 	const std::string& GetName()const;
 	void SetName(const std::string& newName);
-	const CAddress* GetAddress()const;
-	void SetAddress(const CAddress* newAddress);
-    int GetID()const;
+
 	int GetAirTime()const;
 	
 	//operator overloading
-	bool operator+=(int minutes);
-	bool operator==(const CCrewMember& other) const;
+	virtual bool operator+=(int minutes);
+	virtual bool operator==(const CCrewMember& other) const;
 	bool operator!=(const CCrewMember& other) const;
 	const CCrewMember& operator=(const CCrewMember& other);
     friend std::ostream& operator<<(std::ostream& os, const CCrewMember& member);
-	
 
 
-private:
+
+	///////////////////
+	virtual void GetUniform() const = 0;
+	virtual void GetPresent() const;
+	void TakeOff(int minutes);
+	virtual void ToOs(std::ostream& os) const = 0;
+
+
+//private:
+protected:
 	std::string name;
-	CAddress* address;
 	int totalAirTime;
-	static int idCounter;
-	int memberID;
 
 };
 
